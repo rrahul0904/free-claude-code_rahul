@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Certification Lab</title>
+<style>body{margin:0;background:#f6f4ef;color:#1d1b18;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;display:grid;place-items:center;min-height:100vh}main{max-width:680px;padding:32px;text-align:center}.dot{width:44px;height:44px;border-radius:14px;background:#24211e;color:#fff;display:grid;place-items:center;margin:0 auto 14px;font-weight:900}small{color:#716c64}</style>
+</head>
+<body><main><div class="dot">C</div><h1>Claude Certification Lab</h1><p id="status">Loading the verified study application...</p><small>Independent clean-room study tool</small></main>
+<script>
+(async()=>{try{
+const parts=await Promise.all([0,1,2,3,4,5].map(i=>fetch(`payload/c${i}.txt`,{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error(`payload ${i}: ${r.status}`);return r.text()})));
+const b=parts.join('').trim();
+const gz=Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+const stream=new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip'));
+const app=await new Response(stream).text();
+if(app.length!==65212||!app.includes('Claude Certification Lab')||!app.includes('Associate Foundations')||!app.includes('Developer Foundations')||!app.includes('Architect Foundations')||!app.includes('Architect Professional'))throw new Error('artifact validation failed');
+document.open();document.write(app);document.close();
+}catch(e){console.error(e);document.getElementById('status').textContent='The application payload failed validation. No partial app was loaded.';}}
+)();
+</script>
+</body></html>
